@@ -1,4 +1,4 @@
-package org.nachc.tools.synthea.util.create.patients;
+package org.nachc.tools.synthea.tools;
 
 import java.io.File;
 
