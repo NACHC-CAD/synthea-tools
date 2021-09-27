@@ -1,6 +1,5 @@
 package org.nachc.tools.synthea.util.convert;
 
-import java.io.File;
 import java.util.List;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -8,6 +7,7 @@ import org.hl7.fhir.dstu3.model.Bundle.BundleEntryComponent;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Resource;
 
+import com.nach.core.util.fhir.resource.PatientUtil;
 import com.nach.core.util.json.JsonParser;
 
 import lombok.Getter;
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ConvertJsonToPprlCsv {
 
 	private int lastRecordNumber;
-	
+
 	public String exec(String json, int firstRecordNumber) {
 		String rtn = "";
 		rtn += getHeaderRow() + "\n";
@@ -29,11 +29,11 @@ public class ConvertJsonToPprlCsv {
 		int total = list.size();
 		log.info("got " + total + " entries");
 		int currentRecordNumber = firstRecordNumber;
-		for(BundleEntryComponent comp : list) {
+		for (BundleEntryComponent comp : list) {
 			Resource resource = comp.getResource();
-			if(resource != null) {
+			if (resource != null) {
 				String fhirType = resource.fhirType();
-				if("Patient".equals(fhirType)) {
+				if ("Patient".equals(fhirType)) {
 					Patient patient = (Patient) resource;
 					String patientCsv = getPatientAsPprlCsv(currentRecordNumber, patient);
 					rtn += patientCsv + "\n";
@@ -54,7 +54,10 @@ public class ConvertJsonToPprlCsv {
 	private String getPatientAsPprlCsv(int recordId, Patient patient) {
 		String rtn = "";
 		rtn += recordId + ",";
+		rtn += PatientUtil.getGivenName(patient) + ",";
+		rtn += PatientUtil.getFamilyName(patient) + ",";
+		rtn += PatientUtil.getDateOfBirth(patient) + ",";
 		return rtn;
 	}
-	
+
 }
