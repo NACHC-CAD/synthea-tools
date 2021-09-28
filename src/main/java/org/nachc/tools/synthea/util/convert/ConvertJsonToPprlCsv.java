@@ -57,6 +57,12 @@ public class ConvertJsonToPprlCsv {
 		rtn += PatientUtil.getGivenName(patient) + ",";
 		rtn += PatientUtil.getFamilyName(patient) + ",";
 		rtn += PatientUtil.getDateOfBirth(patient) + ",";
+		rtn += PatientUtil.getSex(patient) + ",";
+		rtn += PatientUtil.getPhoneNumber(patient) + ",";
+		rtn += PatientUtil.getAddressStreet1(patient) + ",";
+		rtn += PatientUtil.getAddressZip(patient) + ",";
+		rtn += ",";
+		rtn += ",";
 		return rtn;
 	}
 
