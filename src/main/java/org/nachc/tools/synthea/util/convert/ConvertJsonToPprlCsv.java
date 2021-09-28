@@ -22,12 +22,12 @@ public class ConvertJsonToPprlCsv {
 	public String exec(String json, int firstRecordNumber) {
 		String rtn = "";
 		rtn += getHeaderRow() + "\n";
-		log.info("parsing json");
+		log.debug("parsing json");
 		Bundle bundle = JsonParser.parse(json, Bundle.class);
-		log.info("got bundle");
+		log.debug("got bundle");
 		List<BundleEntryComponent> list = bundle.getEntry();
 		int total = list.size();
-		log.info("got " + total + " entries");
+		log.debug("got " + total + " entries");
 		int currentRecordNumber = firstRecordNumber;
 		for (BundleEntryComponent comp : list) {
 			Resource resource = comp.getResource();
@@ -43,6 +43,7 @@ public class ConvertJsonToPprlCsv {
 				continue;
 			}
 		}
+		this.lastRecordNumber = currentRecordNumber;
 		return rtn;
 	}
 
