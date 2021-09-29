@@ -14,14 +14,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MergeFiles {
 
-	private static final String DIR = "C:\\test\\synthea-patients\\test-sets\\patients-csv\\patients-1000";
+	private static final String DIR = "C:\\test\\synthea-patients\\test-sets\\patients-csv";
 
 	private static final String SUFFIX = "csv";
 
 	public static void main(String[] args) {
 		log.info("Doing merge...");
-		File file = new File(DIR);
-		merge(file, SUFFIX, true);
+		File root = new File(DIR);
+		List<File> dirs = FileUtil.listDirs(root);
+		int cnt = 0;
+		for(File dir : dirs) {
+			cnt++;
+			log.info("Doing merge for dir " + cnt + " of " + dirs.size() + "(" + dir.getName() + ")");
+			merge(dir, SUFFIX, true);
+		}
 		log.info("Done.");
 	}
 
