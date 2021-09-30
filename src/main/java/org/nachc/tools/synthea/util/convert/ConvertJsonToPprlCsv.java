@@ -48,7 +48,7 @@ public class ConvertJsonToPprlCsv {
 	}
 
 	private String getHeaderRow() {
-		String rtn = "record_id, given_name, family_name, DOB, sex, phone_number, household_street_address, household_zip, parent_given_name, parent_family_name, parent_email";
+		String rtn = "record_id,given_name,family_name,DOB,sex,phone_number,household_street_address,household_zip,parent_given_name,parent_family_name,parent_email";
 		return rtn;
 	}
 

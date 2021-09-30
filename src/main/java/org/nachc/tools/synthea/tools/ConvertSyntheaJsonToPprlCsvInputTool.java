@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ConvertSyntheaJsonToPprlCsvInputTool {
 
-	private static final String DIR = "C:\\test\\synthea-patients";
+	private static final String DIR = "C:\\test\\synthea-patients\\json";
 	
 	private static final String OUT = "csv";
 	
