@@ -11,22 +11,28 @@ import com.nach.core.util.file.FileUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * This class was created to merge data files together to create large data sets
+ * for the PPRL project. The code is intended to take all of the files in a
+ * directory and merge them in to a single file.
+ * 
+ * TODO: JEG - Need to write integration test(s) for this class.  
+ *
+ */
+
 @Slf4j
 public class MergeFiles {
 
-	private static final String DIR = "C:\\test\\synthea-patients\\test-sets\\patients-csv";
-
-	private static final String SUFFIX = "csv";
-
-	public static void main(String[] args) {
+	public static void merge(String rootDir, String suffix) {
 		log.info("Doing merge...");
-		File root = new File(DIR);
+		File root = new File(rootDir);
 		List<File> dirs = FileUtil.listDirs(root);
 		int cnt = 0;
-		for(File dir : dirs) {
+		for (File dir : dirs) {
 			cnt++;
 			log.info("Doing merge for dir " + cnt + " of " + dirs.size() + "(" + dir.getName() + ")");
-			merge(dir, SUFFIX, true);
+			merge(dir, suffix, true);
 		}
 		log.info("Done.");
 	}
@@ -35,23 +41,23 @@ public class MergeFiles {
 		PrintWriter writer = null;
 		try {
 			List<File> files = FileUtil.listFilesOnly(dir);
-			String outFileName = dir.getName() + "." + SUFFIX;
+			String outFileName = dir.getName() + "." + outSuffix;
 			File out = new File(dir.getParentFile(), outFileName);
 			writer = new PrintWriter(new FileWriter(out));
 			int cnt = 0;
 			for (File file : files) {
 				cnt++;
 				log.info("Writing file " + cnt + " of " + files.size() + " to " + outFileName);
-				if(cnt == 1) {
+				if (cnt == 1) {
 					writeFile(file, writer, false);
 				} else {
 					writeFile(file, writer, skipHeaderRow);
 				}
 			}
-		} catch(Exception exp) {
+		} catch (Exception exp) {
 			throw new RuntimeException(exp);
 		} finally {
-			if(writer != null) {
+			if (writer != null) {
 				writer.close();
 			}
 		}
@@ -65,7 +71,7 @@ public class MergeFiles {
 			int cnt = 0;
 			while ((line = br.readLine()) != null) {
 				cnt++;
-				if(skipHeaderRow == true && cnt == 1) {
+				if (skipHeaderRow == true && cnt == 1) {
 					continue;
 				}
 				writer.println(line);

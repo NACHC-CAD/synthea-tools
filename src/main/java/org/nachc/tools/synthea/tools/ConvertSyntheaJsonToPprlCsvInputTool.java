@@ -3,7 +3,7 @@ package org.nachc.tools.synthea.tools;
 import java.io.File;
 import java.util.List;
 
-import org.nachc.tools.synthea.util.convert.ConvertJsonToPprlCsv;
+import org.nachc.tools.synthea.util.pprl.ConvertJsonToPprlCsv;
 
 import com.nach.core.util.file.FileUtil;
 
@@ -12,14 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ConvertSyntheaJsonToPprlCsvInputTool {
 
-	private static final String DIR = "C:\\test\\synthea-patients\\json";
-	
-	private static final String OUT = "csv";
-	
-	public static void main(String[] args) {
+	public static void exec(String rootDir, String outDir) {
 		log.info("Generating csv from fhir patients");
-		File dir = new File(DIR);
-		File out = new File(DIR, OUT);
+		File dir = new File(rootDir);
+		File out = new File(rootDir, outDir);
 		// delete the existing output dir if it exists
 		if(out.exists()) {
 			FileUtil.rmdir(out);

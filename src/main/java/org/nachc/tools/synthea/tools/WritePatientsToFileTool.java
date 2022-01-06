@@ -4,32 +4,34 @@ import java.io.File;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Bundle.BundleLinkComponent;
-import org.nachc.tools.synthea.util.patient.GetPatients;
+import org.nachc.tools.synthea.util.patient.SyntheaPatientFetcher;
 
 import com.nach.core.util.file.FileUtil;
 import com.nach.core.util.json.JsonParser;
 
 import lombok.extern.slf4j.Slf4j;
 
+/** 
+ * 
+ * This class was created to write the raw json comming from synthea to a data file
+ * 
+ * TODO: JEG - Need to write integration test(s) for this.  
+ *
+ */
+
 @Slf4j
 public class WritePatientsToFileTool {
 
-	private static final String ROOT_DIR_NAME = "C:\\test\\synthea-patients";
-	
-	private static final int PAGE_SIZE = 1000;
-	
-	private static final int MAX = 1500;
-	
-	public static void main(String[] args) {
+	public void writeFiles(String targetDirectory, int patientsPerRequest, int maxNumberOfRequests) {
 		log.info("Writing patients to file..");
-		File root = new File(ROOT_DIR_NAME);
+		File root = new File(targetDirectory);
 		if(root.exists()) {
 			root.delete();
 		}
-		root = FileUtil.mkdirs(new File(ROOT_DIR_NAME));
+		root = FileUtil.mkdirs(new File(targetDirectory));
 		// get the first response
 		log.info("----------------------");
-		String response = GetPatients.exec(PAGE_SIZE);
+		String response = new SyntheaPatientFetcher().exec(patientsPerRequest);
 		log.info("Got response (length):" + response.length());
 		log.info("Creating hapi object...");
 		Bundle bundle = JsonParser.parse(response, Bundle.class);
@@ -40,13 +42,13 @@ public class WritePatientsToFileTool {
 		FileUtil.write(response, new File(root, "segment-" + cnt + ".json"));
 		// get the rest
 		int errorCount = 0;
-		while(cnt < MAX && next != null) {
+		while(cnt < maxNumberOfRequests && next != null) {
 			log.info("----------------------");
-			log.info("Getting next set of patients (" + cnt + " of " + MAX + ")");
+			log.info("Getting next set of patients (" + cnt + " of " + maxNumberOfRequests + ")");
 			cnt++;
 			String url = next.getUrl();
 			log.info("Got url: " + url);
-			response = GetPatients.getNext(url);
+			response = SyntheaPatientFetcher.getNext(url);
 			log.info("Got response (length):" + response.length());
 			try {
 				bundle = JsonParser.parse(response, Bundle.class);

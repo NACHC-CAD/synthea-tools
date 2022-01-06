@@ -10,9 +10,9 @@ public class GetPatientsIntegrationTest {
 	@Test
 	public void shouldGetPatients() {
 		log.info("Starting test..");
-		String response = GetPatients.exec(10);
+		String response = new SyntheaPatientFetcher().exec(10);
 		log.info("Got response (length):" + response.length());
-		log.info("Response:\n" + response);
+		log.info("Response (for some reason the response doesn't print in eclipse, copy and paste into a text editor if you don't see the response):\n" + response);
 		log.info("Done.");
 	}
 	

@@ -14,7 +14,7 @@ public class GetPatientsPagingIntegrationTest {
 	@Test
 	public void shouldGetPatients() {
 		log.info("Starting test..");
-		String response = GetPatients.exec(10);
+		String response = new SyntheaPatientFetcher().exec(10);
 		log.info("Got response (length):" + response.length());
 		log.info("Creating hapi object...");
 		Bundle bundle = JsonParser.parse(response, Bundle.class);
@@ -23,7 +23,7 @@ public class GetPatientsPagingIntegrationTest {
 		log.info("Got next: " + next);
 		String url = next.getUrl();
 		log.info("Got url: " + url);
-		response = GetPatients.getNext(url);
+		response = SyntheaPatientFetcher.getNext(url);
 		log.info("Got response (length):" + response.length());
 		log.info("Done.");
 	}

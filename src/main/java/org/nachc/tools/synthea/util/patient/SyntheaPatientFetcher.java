@@ -8,9 +8,19 @@ import com.nach.core.util.oauth.OauthTokenFactory;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GetPatients {
+public class SyntheaPatientFetcher {
 
-	public static String getToken() {
+	private HttpRequestClient client;
+	
+	public HttpRequestClient getClient() {
+		return this.client;
+	}
+	
+	public int getStatusCode() {
+		return this.client.getStatusCode();
+	}
+	
+	public String getToken() {
 		String url = AuthParams.getOauthUrl();
 		String uid = AuthParams.getAppId();
 		String secret = AuthParams.getSecret();
@@ -21,14 +31,14 @@ public class GetPatients {
 		return OauthTokenFactory.getToken(url, uid, secret, headers, msg);
 	}
 	
-	public static String exec(int howMany) {
+	public String exec(int howMany) {
 		String url = AuthParams.getUrl();
 		String key = AuthParams.getKey();
 		url += "/Patient?";
 		url += "_count=" + howMany;
 		url += "&apikey=" + key;
 		log.info("URL: " + url);
-		HttpRequestClient client = new HttpRequestClient(url);
+		this.client = new HttpRequestClient(url);
 		client.doGet();
 		int status = client.getStatusCode();
 		log.info("Got status: " + status);
