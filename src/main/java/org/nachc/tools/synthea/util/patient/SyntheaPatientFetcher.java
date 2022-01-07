@@ -31,7 +31,7 @@ public class SyntheaPatientFetcher {
 		return OauthTokenFactory.getToken(url, uid, secret, headers, msg);
 	}
 	
-	public String exec(int howMany) {
+	public String fetchPatients(int howMany) {
 		String url = AuthParams.getUrl();
 		String key = AuthParams.getKey();
 		url += "/Patient?";
@@ -57,6 +57,10 @@ public class SyntheaPatientFetcher {
 		String response = client.getResponse();
 		log.info("Response length: " + response.length());
 		return response;
+	}
+	
+	public String fetchEverything(String patientId) {
+		return null;
 	}
 	
 }

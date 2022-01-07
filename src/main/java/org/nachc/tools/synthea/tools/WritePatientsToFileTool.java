@@ -31,7 +31,7 @@ public class WritePatientsToFileTool {
 		root = FileUtil.mkdirs(new File(targetDirectory));
 		// get the first response
 		log.info("----------------------");
-		String response = new SyntheaPatientFetcher().exec(patientsPerRequest);
+		String response = new SyntheaPatientFetcher().fetchPatients(patientsPerRequest);
 		log.info("Got response (length):" + response.length());
 		log.info("Creating hapi object...");
 		Bundle bundle = JsonParser.parse(response, Bundle.class);

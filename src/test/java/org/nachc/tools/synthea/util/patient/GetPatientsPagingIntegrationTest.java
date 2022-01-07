@@ -14,7 +14,7 @@ public class GetPatientsPagingIntegrationTest {
 	@Test
 	public void shouldGetPatients() {
 		log.info("Starting test..");
-		String response = new SyntheaPatientFetcher().exec(10);
+		String response = new SyntheaPatientFetcher().fetchPatients(10);
 		log.info("Got response (length):" + response.length());
 		log.info("Creating hapi object...");
 		Bundle bundle = JsonParser.parse(response, Bundle.class);
