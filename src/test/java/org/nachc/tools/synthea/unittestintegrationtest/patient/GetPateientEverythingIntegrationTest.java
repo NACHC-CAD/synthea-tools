@@ -1,4 +1,4 @@
-package org.nachc.tools.synthea.util.patient;
+package org.nachc.tools.synthea.unittestintegrationtest.patient;
 
 import java.io.File;
 
@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.nachc.tools.synthea.unittesttools.TestingParams;
 import org.nachc.tools.synthea.util.fhir.BundleParser;
 import org.nachc.tools.synthea.util.fhir.PatientParser;
+import org.nachc.tools.synthea.util.patient.SyntheaPatientFetcher;
 
 import com.nach.core.util.file.FileUtil;
 import com.nach.core.util.json.JsonUtil;

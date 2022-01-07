@@ -1,4 +1,4 @@
-package org.nachc.tools.synthea.util.patient;
+package org.nachc.tools.synthea.unittestintegrationtest.patientsummary;
 
 import static org.junit.Assert.assertTrue;
 
@@ -8,11 +8,12 @@ import org.hl7.fhir.dstu3.model.Patient;
 import org.junit.Test;
 import org.nachc.tools.synthea.util.fhir.BundleParser;
 import org.nachc.tools.synthea.util.fhir.PatientParser;
+import org.nachc.tools.synthea.util.patient.SyntheaPatientFetcher;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ParsePatientListIntoHapi {
+public class ParsePatientSummaryListIntoHapi {
 
 	@Test
 	public void shouldGetPatients() {
@@ -26,7 +27,7 @@ public class ParsePatientListIntoHapi {
 		List<Patient> patients = bundle.getPatients();
 		log.info("Got " + patients.size() + " patients (expecting " + cnt + ")");
 		assertTrue(patients.size() == cnt);
-		for(Patient fhirPatient : patients) {
+		for (Patient fhirPatient : patients) {
 			log.info("--------------------------------");
 			PatientParser patient = new PatientParser(fhirPatient);
 			String patientId = patient.getId();

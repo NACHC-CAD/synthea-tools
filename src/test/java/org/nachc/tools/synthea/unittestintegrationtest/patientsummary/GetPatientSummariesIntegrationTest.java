@@ -1,11 +1,12 @@
-package org.nachc.tools.synthea.util.patient;
+package org.nachc.tools.synthea.unittestintegrationtest.patientsummary;
 
 import org.junit.Test;
+import org.nachc.tools.synthea.util.patient.SyntheaPatientFetcher;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GetPatientsIntegrationTest {
+public class GetPatientSummariesIntegrationTest {
 
 	@Test
 	public void shouldGetPatients() {

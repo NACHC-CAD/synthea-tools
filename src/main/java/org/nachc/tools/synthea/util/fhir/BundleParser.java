@@ -38,4 +38,14 @@ public class BundleParser {
 		return patients;
 	}
 
+	public List<String> getResourceTypes() {
+		List<String> types = new ArrayList<String>();
+		List<BundleEntryComponent> entries = bundle.getEntry();
+		for(BundleEntryComponent entry : entries) {
+			String type = entry.fhirType();
+			types.add(type);
+		}
+		return types;
+	}
+	
 }

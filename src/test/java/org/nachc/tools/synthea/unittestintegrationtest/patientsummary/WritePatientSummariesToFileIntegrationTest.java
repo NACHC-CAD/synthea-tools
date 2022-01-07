@@ -1,9 +1,10 @@
-package org.nachc.tools.synthea.util.patient;
+package org.nachc.tools.synthea.unittestintegrationtest.patientsummary;
 
 import java.io.File;
 
 import org.junit.Test;
 import org.nachc.tools.synthea.unittesttools.TestingParams;
+import org.nachc.tools.synthea.util.patient.SyntheaPatientFetcher;
 
 import com.nach.core.util.file.FileUtil;
 import com.nach.core.util.json.JsonUtil;
@@ -11,7 +12,7 @@ import com.nach.core.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class WritePatientsToFileIntegrationTest {
+public class WritePatientSummariesToFileIntegrationTest {
 
 	@Test
 	public void shouldGetPatients() {
@@ -26,6 +27,5 @@ public class WritePatientsToFileIntegrationTest {
 		FileUtil.write(response, file);
 		log.info("Done.");
 	}
-	
-	
+
 }

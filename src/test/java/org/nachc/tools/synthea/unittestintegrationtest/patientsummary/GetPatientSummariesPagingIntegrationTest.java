@@ -1,15 +1,16 @@
-package org.nachc.tools.synthea.util.patient;
+package org.nachc.tools.synthea.unittestintegrationtest.patientsummary;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Bundle.BundleLinkComponent;
 import org.junit.Test;
+import org.nachc.tools.synthea.util.patient.SyntheaPatientFetcher;
 
 import com.nach.core.util.json.JsonParser;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GetPatientsPagingIntegrationTest {
+public class GetPatientSummariesPagingIntegrationTest {
 
 	@Test
 	public void shouldGetPatients() {
@@ -27,5 +28,5 @@ public class GetPatientsPagingIntegrationTest {
 		log.info("Got response (length):" + response.length());
 		log.info("Done.");
 	}
-	
+
 }
