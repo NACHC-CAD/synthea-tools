@@ -3,6 +3,7 @@ package org.nachc.tools.synthea.util.patient;
 import java.io.File;
 
 import org.junit.Test;
+import org.nachc.tools.synthea.unittesttools.TestingParams;
 
 import com.nach.core.util.file.FileUtil;
 import com.nach.core.util.json.JsonUtil;
@@ -19,7 +20,7 @@ public class WritePatientsToFileIntegrationTest {
 		log.info("Got response (length):" + response.length());
 		response = JsonUtil.prettyPrint(response);
 		log.info("Response (for some reason the response doesn't print in eclipse, copy and paste into a text editor if you don't see the response):\n" + response);
-		File file = new File("/test/synthea-tools/test-patient.json");
+		File file = TestingParams.getOutFile("test-patient.json");
 		FileUtil.mkdirs(file.getParentFile());
 		log.info("Writing patient to file: " + FileUtil.getCanonicalPath(file));
 		FileUtil.write(response, file);

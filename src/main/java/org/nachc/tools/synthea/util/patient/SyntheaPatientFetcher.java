@@ -60,7 +60,18 @@ public class SyntheaPatientFetcher {
 	}
 	
 	public String fetchEverything(String patientId) {
-		return null;
+		String url = AuthParams.getUrl();
+		String key = AuthParams.getKey();
+		url += "/Patient/" + patientId + "/$everything?";
+		url += "apikey=" + key;
+		log.info("URL: " + url);
+		this.client = new HttpRequestClient(url);
+		client.doGet();
+		int status = client.getStatusCode();
+		log.info("Got status: " + status);
+		String response = client.getResponse();
+		log.info("Response length: " + response.length());
+		return response;
 	}
 	
 }
