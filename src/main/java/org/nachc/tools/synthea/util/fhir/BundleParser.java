@@ -42,7 +42,8 @@ public class BundleParser {
 		List<String> types = new ArrayList<String>();
 		List<BundleEntryComponent> entries = bundle.getEntry();
 		for(BundleEntryComponent entry : entries) {
-			String type = entry.fhirType();
+			Resource resource = entry.getResource();
+			String type = resource.getClass().getName();
 			types.add(type);
 		}
 		return types;

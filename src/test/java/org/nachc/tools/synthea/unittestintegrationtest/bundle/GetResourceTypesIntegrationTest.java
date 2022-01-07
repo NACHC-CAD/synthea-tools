@@ -20,9 +20,17 @@ public class GetResourceTypesIntegrationTest {
 		String patientJson = new SyntheaPatientFetcher().fetchPatients(1);
 		Patient fhirPatient = new BundleParser(patientJson).getPatients().get(0);
 		PatientParser patient = new PatientParser(fhirPatient);
-		log.info("Got response:\n" + patientJson);
+		String patientId = patient.getId();
+		log.info("Getting everything...");
+		SyntheaPatientFetcher synthea = new SyntheaPatientFetcher();
+		String everythingJson = synthea.fetchEverything(patientId);
+		log.info("STATUS: " + synthea.getStatusCode());
 		log.info("Parsing types...");
-		List<String> types = new BundleParser(patientJson).getResourceTypes();
+		List<String> types = new BundleParser(everythingJson).getResourceTypes();
+		log.info("Got " + types.size() + " types");
+		for(String type : types) {
+			log.info("\t" + type);
+		}
 		log.info("Got " + types.size() + " types");
 		log.info("Done.");
 	}
