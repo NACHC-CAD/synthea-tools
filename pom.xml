@@ -62,6 +62,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- MYSQL DRIVER https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.19</version>
+		</dependency>
+
 		<!-- CORE NACHC FRAMEWORK STUFF -->
 		<dependency>
 			<groupId>NACHC-CAD</groupId>

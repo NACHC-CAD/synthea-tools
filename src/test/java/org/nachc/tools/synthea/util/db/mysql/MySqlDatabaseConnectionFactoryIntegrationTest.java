@@ -23,7 +23,7 @@ public class MySqlDatabaseConnectionFactoryIntegrationTest {
 			Data data = Database.query(queryString, conn);
 			log.info("Got " + data.size() + " rows.");
 			for(Row row : data) {
-				log.info("\t" + data.get(0));
+				log.info("\t" + row.get("tableName"));
 			}
 		} finally {
 			log.info("Closing connection...");
