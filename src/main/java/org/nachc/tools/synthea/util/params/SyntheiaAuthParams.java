@@ -4,9 +4,9 @@ import java.util.Properties;
 
 import com.nach.core.util.props.PropertiesUtil;
 
-public class AuthParams {
+public class SyntheiaAuthParams {
 
-	public static final Properties PROPS = PropertiesUtil.getAsProperties("auth/auth.properties");
+	public static final Properties PROPS = PropertiesUtil.getAsProperties("synthia-auth/auth.properties");
 
 	public static String getOauthUrl() {
 		return PROPS.getProperty("oauth-url");

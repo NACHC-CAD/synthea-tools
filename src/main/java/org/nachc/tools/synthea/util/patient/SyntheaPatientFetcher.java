@@ -1,6 +1,6 @@
 package org.nachc.tools.synthea.util.patient;
 
-import org.nachc.tools.synthea.util.params.AuthParams;
+import org.nachc.tools.synthea.util.params.SyntheiaAuthParams;
 
 import com.nach.core.util.http.HttpRequestClient;
 import com.nach.core.util.oauth.OauthTokenFactory;
@@ -21,9 +21,9 @@ public class SyntheaPatientFetcher {
 	}
 	
 	public String getToken() {
-		String url = AuthParams.getOauthUrl();
-		String uid = AuthParams.getAppId();
-		String secret = AuthParams.getSecret();
+		String url = SyntheiaAuthParams.getOauthUrl();
+		String uid = SyntheiaAuthParams.getAppId();
+		String secret = SyntheiaAuthParams.getSecret();
 		String[] accept = new String[] {"Accept", "application/json"};
 		String[] contentType = new String[] {"Content-Type", "application/json"};
 		String[][] headers = new String[][] {accept, contentType};
@@ -32,8 +32,8 @@ public class SyntheaPatientFetcher {
 	}
 	
 	public String fetchPatients(int howMany) {
-		String url = AuthParams.getUrl();
-		String key = AuthParams.getKey();
+		String url = SyntheiaAuthParams.getUrl();
+		String key = SyntheiaAuthParams.getKey();
 		url += "/Patient?";
 		url += "_count=" + howMany;
 		url += "&apikey=" + key;
@@ -48,7 +48,7 @@ public class SyntheaPatientFetcher {
 	}
 	
 	public static String getNext(String url) {
-		String key = AuthParams.getKey();
+		String key = SyntheiaAuthParams.getKey();
 		url += "&apikey=" + key;
 		HttpRequestClient client = new HttpRequestClient(url);
 		client.doGet();
@@ -60,8 +60,8 @@ public class SyntheaPatientFetcher {
 	}
 	
 	public String fetchEverything(String patientId) {
-		String url = AuthParams.getUrl();
-		String key = AuthParams.getKey();
+		String url = SyntheiaAuthParams.getUrl();
+		String key = SyntheiaAuthParams.getKey();
 		url += "/Patient/" + patientId + "/$everything?";
 		url += "apikey=" + key;
 		log.info("URL: " + url);
