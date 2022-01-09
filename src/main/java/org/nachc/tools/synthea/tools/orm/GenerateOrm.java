@@ -20,9 +20,9 @@ public class GenerateOrm {
 	public static void generateDvos() {
 		try {
 			Connection conn = MySqlDatabaseConnectionFactory.getSyntheaConnection();
-			String schemaName = "cosmos";
-			String packageName = "org.nachc.cad.cosmos.dvo.mysql.cosmos";
-			File destDir = FileUtil.getFromProjectRoot("/src/main/java/org/nachc/cad/cosmos/dvo/mysql/cosmos");
+			String schemaName = "synthea_omop";
+			String packageName = "org.nachc.tools.synthea.util.dvo";
+			File destDir = FileUtil.getFromProjectRoot("/src/main/java/org/nachc/tools/synthea/util/dvo");
 			FileUtil.clearContents(destDir);
 			GenerateOrmForSchema.execute(conn, schemaName, packageName, destDir);
 			log.info("Done with generate dvos.");
